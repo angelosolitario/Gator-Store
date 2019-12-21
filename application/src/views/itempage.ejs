@@ -1,0 +1,88 @@
+<!-- single item page -->
+<% title = item.title; jsFiles = []; cssFiles = []; %>
+
+<%include ./partials/header.ejs%>
+<%include ./partials/navbar.ejs%>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- item container -->
+    <div class="col-12 col-md-8">
+      <h2><%=item.title%> - $<%=item.price%></h2>
+      <div class="d-flex justify-content-center mb-3">
+        <img class="item-img" src = <%=item.photo%> alt="" />
+      </div>
+
+      <h3><strong>Item description:</strong></h3>
+      <div class="item-description">
+        <p><%=item.description%></p>
+      </div>
+      <div>
+        <p class = 'text-muted'><strong>Last updated:</strong> <%=item.updatedAt%></p>
+      </div>
+    </div>
+
+    <!-- seller information (hard coded for now) -->
+    <div class="col-6 col-md-4">
+      <h5>Seller:</h5>
+      <div class="seller-image text-center">
+        <img
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+          style="max-width: 250px;"
+          alt=""
+        />
+        <p><%=item.User.firstName%> <%=item.User.lastName%></p>
+      </div>
+      <!-- Redirect to login if not logged in -->
+      <div class="text-center">
+        <% if (!user || user.firstName!=item.User.firstName) { %>
+          <button class="btn btn-warning"
+            <% if (!user) { %>onclick="location.href='/login?redirectTo='+encodeURIComponent(location.pathname);"<% } %>
+            <% if (user) { %>data-toggle="modal" data-target="#contact-modal"<% } %>
+          >Contact Seller</button>
+        <% } %>
+      </div>
+
+      <!-- Contact Modal -->
+      <div class="modal fade" id="contact-modal" role="dialog">
+        <div class="modal-dialog">
+          <form action="/contact?item=<%=item.id%>" method="post">
+            <!-- Contact Modal content-->
+            <div class="modal-content row">
+              <div class="modal-header">
+                <h4 class="modal-title"><%=item.title%></h4>
+              </div>
+                <div class="modal-body row">
+                  <p class="col-md-10">Buyer <input readonly type="text" <% if (user) { %>value="<%= user.firstName %>"<% } %>></p>
+                  <p class="col-md-10">Seller <input readonly type="text" value="<%= item.User.firstName %>"></p>
+
+                  <input type="hidden" name="from" <% if (user) { %>value="<%= user.id %>"<% } %>>
+                  <input type="hidden" name="to" value="<%= item.User.id %>">
+
+                  <select name="contactLocation" class="float-left col-md-5">
+                    <option>Library</option>
+                    <option>Station Cafe</option>
+                    <option>Thornton Hall</option>
+                    <option>Peet's Coffee</option>
+                    <option>Student Center</option>
+                  </select>
+
+                  <input name="contactTime" class="float-right col-md-5" type="text" placeholder="type in time to contact">
+
+                  <textarea name="contactDetails" class="item-description col-md-12" type="text" placeholder="type in details"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button id="submit-contact" type="submit" class="btn btn-success">Send</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<%include ./partials/footer.ejs%>

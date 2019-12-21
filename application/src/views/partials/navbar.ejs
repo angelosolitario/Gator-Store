@@ -1,0 +1,66 @@
+<!-- navbar includes the searchbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-background navbar-custom">
+  <a class="navbar-brand" href="/">Gator Store</a>
+
+  <!-- hamburger dropdown when collapsed  -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav w-100 justify-content-center">
+
+      <a class="nav-item nav-link" href="../about" target = "_blank">About </a>
+      <a class="nav-item nav-link mr-5" href="/posting">Sell</a>
+
+      <!-- form for the searchbar -->
+      <form class="w-50" action="/results" method="get" id="search-form">
+        <div class="input-group">
+          <select class="custom-select btn" name="category">
+            <option value="">All</option>
+            <% for (let category of categories) { %>
+            <option value="<%= category.id %>"<%= query.category == category.id ? ' selected' : '' %>><%= category.name %></option>
+            <% } %>
+          </select>
+
+          <input
+            type="text"
+            class="form-control form-inline w-75"
+            placeholder="Go Find It!"
+            maxlength="40"
+            name="search"
+            <% if (query.search) { %>value="<%= query.search %>"<% } %>
+          />
+          <button
+            class="btn btn-warning input-group-append"
+            type="submit"
+            id="button-addon2"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+      <% if (user) { %>
+        <a class="nav-item nav-link ml-5" href="/dashboard"><%=user.firstName%>'s Dashboard</a>
+        <% if (user.role.split(',').includes('admin')) { %>
+          <a class="nav-item nav-link" href="/admin">Admin</a>
+        <% } %>
+        <a class="nav-item nav-link" href="/logout">Log Out</a>
+      <% } else { %>
+        <a class="nav-item nav-link ml-5" href="/signup">Sign Up</a>
+        <a class="nav-item nav-link" href="/login">Login</a>
+      <% } %>
+    </div>
+  </div>
+</nav>
+
+<!-- last updated: 11/19/2019 - angelo solitario -->
