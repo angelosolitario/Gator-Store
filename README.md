@@ -10,11 +10,11 @@ Front-end Language: bootstrap, css, html, javaScript
 Server-Side Language Engine: Node.js v10.x
 Server-Side Language: JavaScript
 Additional Technologies:
-- Web Framework: Express.js v4.x
-- Web Analytics: Google Analytics
-- VirtualBox v6.x
-- Vagrant v2.x
-- Ansible v2.x
+-- Web Framework: Express.js v4.x
+-- Web Analytics: Google Analytics
+-- VirtualBox v6.x
+-- Vagrant v2.x
+-- Ansible v2.x
 
 
 # Team Members
