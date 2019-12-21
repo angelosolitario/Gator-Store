@@ -1,8 +1,8 @@
 Visit http://gatorstore.duckdns.org
 
-#Gator Store
+# Gator Store
 
-#Team Members
+# Team Members
 - Beibei Jiang (Team Lead)
 - Fiona Ren (Front End Lead)
 - Jesse Smick (Back End Lead)
