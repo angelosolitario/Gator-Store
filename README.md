@@ -1,6 +1,8 @@
 Visit http://gatorstore.duckdns.org
 
 # Gator Store
+## Tech Stack
+
 
 # Team Members
 - Beibei Jiang (Team Lead)
